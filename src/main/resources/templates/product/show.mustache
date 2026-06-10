@@ -1,0 +1,140 @@
+{{>header}}
+
+<main class="container py-5">
+    <!-- Breadcrumb -->
+    <nav class="mb-4">
+        <ol class="breadcrumb" style="font-size:.84rem;">
+            <li class="breadcrumb-item"><a href="/products" class="text-decoration-none" style="color:var(--sky-600);">전체 상품</a></li>
+            <li class="breadcrumb-item"><a href="/product/category/{{product.category}}" class="text-decoration-none" style="color:var(--sky-600);">{{product.category}}</a></li>
+            <li class="breadcrumb-item active text-muted">{{product.name}}</li>
+        </ol>
+    </nav>
+
+    <!-- Product Detail -->
+    <div class="row g-5 mb-5">
+        <!-- Images -->
+        <div class="col-lg-5">
+            {{#images}}{{#representative}}
+            <div class="rounded-4 overflow-hidden mb-3" style="aspect-ratio:1/1;background:var(--sky-50);">
+                <img src="{{imageUrl}}" alt="{{originalFileName}}" id="mainImg"
+                     class="w-100 h-100" style="object-fit:cover;">
+            </div>
+            {{/representative}}{{/images}}
+            {{^images}}
+            <div class="rounded-4 d-flex align-items-center justify-content-center"
+                 style="aspect-ratio:1/1;background:var(--sky-50);border:2px dashed var(--sky-200);">
+                <div class="text-center">
+                    <i class="bi bi-image" style="font-size:4rem;color:var(--sky-200);"></i>
+                    <p class="text-muted small mt-2">이미지 없음</p>
+                </div>
+            </div>
+            {{/images}}
+            <div class="d-flex gap-2 flex-wrap mt-2">
+                {{#images}}
+                <div class="rounded-3 overflow-hidden"
+                     style="width:60px;height:60px;border:2px solid {{#representative}}var(--sky-500){{/representative}}{{^representative}}var(--sky-100){{/representative}};cursor:pointer;"
+                     onclick="document.getElementById('mainImg').src='{{imageUrl}}'">
+                    <img src="{{imageUrl}}" class="w-100 h-100" style="object-fit:cover;">
+                </div>
+                {{/images}}
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="col-lg-7">
+            <span class="cat-badge cat-badge-lg mb-3">{{product.category}}</span>
+            <h1 class="fw-bold mt-2 mb-2" style="color:var(--sky-900);font-size:1.8rem;">{{product.name}}</h1>
+            <p class="text-muted mb-4" style="font-size:1rem;line-height:1.7;">{{product.description}}</p>
+
+            <div class="p-4 rounded-3 mb-4" style="background:var(--sky-50);">
+                <div class="d-flex align-items-end gap-2 mb-3">
+                    <span class="price-tag" style="font-size:2.2rem;">₩{{product.price}}</span>
+                </div>
+                <button class="btn btn-sky w-100 py-3 fs-6"
+                        onclick="alert('로그인 후 구매 가능합니다.')">
+                    <i class="bi bi-cart-plus me-2"></i>장바구니 담기
+                </button>
+            </div>
+
+            <div class="d-flex gap-4 text-muted" style="font-size:.8rem;">
+                <span><i class="bi bi-calendar3 me-1"></i>등록 {{product.createdAtFormatted}}</span>
+                <span><i class="bi bi-arrow-clockwise me-1"></i>수정 {{product.updatedAtFormatted}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── Reviews Section ─── -->
+    <div id="reviews">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h3 class="section-title mb-0">
+                <i class="bi bi-chat-square-text me-2" style="color:var(--sky-500);"></i>
+                상품 리뷰
+            </h3>
+        </div>
+
+        <!-- Review Cards -->
+        {{#articles}}
+        <div class="review-card mb-3">
+            <div class="d-flex gap-3">
+                <div class="author-avatar">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="fw-bold mb-0">{{title}}</h6>
+                        <small class="text-muted">{{createdAtFormatted}}</small>
+                    </div>
+                    <p class="text-muted mb-2" style="font-size:.9rem;line-height:1.6;">{{content}}</p>
+                    <div class="d-flex gap-2">
+                        <a href="/articles/{{id}}" class="btn btn-sky-outline btn-sm px-3">
+                            <i class="bi bi-chat-dots me-1"></i>댓글 보기
+                        </a>
+                        <a href="/articles/{{id}}/delete" class="btn btn-outline-danger btn-sm px-3"
+                           onclick="return confirm('삭제하시겠습니까?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/articles}}
+        {{^articles}}
+        <div class="text-center py-5" style="background:var(--sky-50);border-radius:16px;">
+            <i class="bi bi-chat-square" style="font-size:2.5rem;color:var(--sky-200);"></i>
+            <p class="text-muted mt-3">아직 리뷰가 없습니다. 첫 리뷰를 작성해보세요!</p>
+        </div>
+        {{/articles}}
+
+        <!-- Write Review Form -->
+        <div class="mt-5 p-4 rounded-4" style="background:#fff;border:1.5px solid var(--sky-100);">
+            <h5 class="fw-bold mb-4" style="color:var(--sky-700);">
+                <i class="bi bi-pencil-fill me-2"></i>리뷰 작성
+            </h5>
+            <form action="/articles/create" method="post">
+                <input type="hidden" name="productId" value="{{productId}}">
+                <div class="mb-3">
+                    <input type="text" class="form-control rounded-3 input-sky"
+                           name="title" placeholder="리뷰 제목" required>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control rounded-3 input-sky"
+                              name="content" rows="4"
+                              placeholder="상품 사용 후기를 자세히 적어주세요..." required></textarea>
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-sky px-5 py-2">
+                        <i class="bi bi-send me-2"></i>리뷰 등록
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/products" class="btn btn-sky-outline px-4">
+            <i class="bi bi-arrow-left me-1"></i>목록으로
+        </a>
+    </div>
+</main>
+
+{{>footer}}

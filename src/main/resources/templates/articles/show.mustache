@@ -1,0 +1,112 @@
+{{>header}}
+
+<main class="container py-5" style="max-width:800px;">
+    <!-- Breadcrumb -->
+    <nav class="mb-4">
+        <ol class="breadcrumb" style="font-size:.84rem;">
+            <li class="breadcrumb-item"><a href="/products" class="text-decoration-none" style="color:var(--sky-600);">전체 상품</a></li>
+            {{#article.productId}}
+            <li class="breadcrumb-item">
+                <a href="/products/{{article.productId}}" class="text-decoration-none" style="color:var(--sky-600);">{{article.productName}}</a>
+            </li>
+            {{/article.productId}}
+            <li class="breadcrumb-item active text-muted">리뷰</li>
+        </ol>
+    </nav>
+
+    <!-- Article Card -->
+    <div class="shop-card p-4 p-md-5 mb-4">
+        <div class="d-flex gap-3 mb-4">
+            <div class="author-avatar" style="width:48px;height:48px;font-size:1.2rem;">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <div>
+                <h2 class="fw-bold mb-1" style="color:var(--sky-900);">{{article.title}}</h2>
+                <div class="d-flex gap-3 text-muted" style="font-size:.8rem;">
+                    <span><i class="bi bi-calendar3 me-1"></i>{{article.createdAtFormatted}}</span>
+                    {{#article.productName}}
+                    <span><i class="bi bi-box-seam me-1"></i>{{article.productName}}</span>
+                    {{/article.productName}}
+                </div>
+            </div>
+        </div>
+        <div class="p-4 rounded-3 mb-4" style="background:var(--sky-50);font-size:1rem;line-height:1.8;color:var(--text-dark);">
+            {{article.content}}
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/articles/{{article.id}}/edit" class="btn btn-sky-outline btn-sm px-3">
+                <i class="bi bi-pencil me-1"></i>수정
+            </a>
+            <a href="/articles/{{article.id}}/delete" class="btn btn-outline-danger btn-sm px-3"
+               onclick="return confirm('삭제하시겠습니까?')">
+                <i class="bi bi-trash me-1"></i>삭제
+            </a>
+            {{#article.productId}}
+            <a href="/products/{{article.productId}}#reviews" class="btn btn-sky-outline btn-sm px-3 ms-auto">
+                <i class="bi bi-arrow-left me-1"></i>상품으로 돌아가기
+            </a>
+            {{/article.productId}}
+        </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="mb-4">
+        <h5 class="fw-bold mb-4" style="color:var(--sky-700);">
+            <i class="bi bi-chat-dots me-2"></i>댓글
+        </h5>
+
+        {{#comments}}
+        <div class="d-flex gap-3 mb-3">
+            <div class="author-avatar" style="width:36px;height:36px;font-size:.85rem;">
+                {{nickname}}
+            </div>
+            <div class="flex-grow-1 p-3 rounded-3" style="background:#fff;border:1px solid var(--sky-100);">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="fw-semibold" style="font-size:.88rem;">{{nickname}}</span>
+                    <small class="text-muted">{{createdAtFormatted}}</small>
+                </div>
+                <p class="mb-0 text-muted" style="font-size:.9rem;">{{body}}</p>
+            </div>
+        </div>
+        {{/comments}}
+        {{^comments}}
+        <p class="text-muted text-center py-3 rounded-3" style="background:var(--sky-50);">첫 댓글을 남겨보세요!</p>
+        {{/comments}}
+    </div>
+
+    <!-- Comment Form -->
+    <div class="p-4 rounded-4" style="background:#fff;border:1.5px solid var(--sky-100);">
+        <h6 class="fw-bold mb-3" style="color:var(--sky-700);">댓글 작성</h6>
+        <form id="commentForm">
+            <div class="d-flex gap-2">
+                <input type="text" id="nickname" class="form-control rounded-3 input-sky"
+                       placeholder="닉네임" style="max-width:120px;" required>
+                <input type="text" id="body" class="form-control rounded-3 input-sky"
+                       placeholder="댓글 내용을 입력하세요..." required>
+                <button type="submit" class="btn btn-sky px-4 flex-shrink-0">
+                    <i class="bi bi-send me-1"></i>등록
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script>
+document.getElementById('commentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const articleId = {{article.id}};
+    const nickname = document.getElementById('nickname').value;
+    const body = document.getElementById('body').value;
+    try {
+        const res = await fetch(`/api/articles/${articleId}/comments`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({articleId, nickname, body})
+        });
+        if (res.ok) location.reload();
+        else alert('댓글 등록에 실패했습니다.');
+    } catch(err) { alert('오류가 발생했습니다.'); }
+});
+</script>
+
+{{>footer}}

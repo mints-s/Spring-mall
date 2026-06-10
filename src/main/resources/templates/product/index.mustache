@@ -1,0 +1,23 @@
+{{>header}}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">price</th>
+        <th scope="col">category</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#articleList}}
+        <tr>
+            <th >{{id}}</th>
+            <td ><a href="/product/{{id}}"> {{name}} </a></td>
+            <td>{{price}}</td>
+            <td>{{category}}</td>
+        </tr>
+    {{/articleList}}
+    </tbody>
+</table>
+<a href="/product/new">New Product</a>
+{{>footer}}

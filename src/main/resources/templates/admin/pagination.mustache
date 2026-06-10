@@ -1,0 +1,14 @@
+{{#pageInfo}}
+<div class="erp-pagination">
+    {{#hasPrevious}}
+    <a class="erp-page-btn" href="?page={{previousPage}}"><i class="bi bi-chevron-left"></i></a>
+    {{/hasPrevious}}
+    {{#pageNumbers}}
+    <a class="erp-page-btn {{#active}}active{{/active}}" href="?page={{number}}">{{display}}</a>
+    {{/pageNumbers}}
+    {{#hasNext}}
+    <a class="erp-page-btn" href="?page={{nextPage}}"><i class="bi bi-chevron-right"></i></a>
+    {{/hasNext}}
+    <span class="erp-total">총 {{totalElements}}건 / {{totalPages}}페이지</span>
+</div>
+{{/pageInfo}}

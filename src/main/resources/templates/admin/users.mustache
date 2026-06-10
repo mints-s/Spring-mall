@@ -1,0 +1,69 @@
+{{>admin-header}}
+
+<div class="erp-page-title"><i class="bi bi-people-fill" style="color:#0ea5e9;"></i> 유저 관리</div>
+
+<div class="erp-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>유저 목록</span>
+        <span class="text-muted" style="font-size:0.8rem;">총 {{pageInfo.totalElements}}명</span>
+    </div>
+    <table class="erp-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이메일</th>
+                <th>권한</th>
+                <th>상태</th>
+                <th>가입일</th>
+                <th>관리</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#users}}
+            <tr>
+                <td class="text-muted">{{id}}</td>
+                <td><i class="bi bi-person-circle text-primary me-1"></i>{{email}}</td>
+                <td>
+                    {{#admin}}<span class="erp-badge badge-admin"><i class="bi bi-shield-fill me-1"></i>ADMIN</span>{{/admin}}
+                    {{^admin}}<span class="erp-badge badge-user">USER</span>{{/admin}}
+                </td>
+                <td>
+                    {{#enabled}}<span class="erp-badge badge-active">활성</span>{{/enabled}}
+                    {{^enabled}}<span class="erp-badge badge-inactive">비활성</span>{{/enabled}}
+                </td>
+                <td class="text-muted">{{createdAtFormatted}}</td>
+                <td>
+                    <div class="d-flex gap-1 flex-wrap">
+                        {{#admin}}
+                        <form action="/admin/users/{{id}}/role" method="post" class="d-inline">
+                            <input type="hidden" name="role" value="USER">
+                            <button class="erp-btn" style="color:#6b7280;border-color:#d1d5db;">USER 강등</button>
+                        </form>
+                        {{/admin}}
+                        {{^admin}}
+                        <form action="/admin/users/{{id}}/role" method="post" class="d-inline">
+                            <input type="hidden" name="role" value="ADMIN">
+                            <button class="erp-btn" style="color:#b45309;border-color:#fcd34d;">ADMIN 승격</button>
+                        </form>
+                        {{/admin}}
+                        {{#enabled}}
+                        <form action="/admin/users/{{id}}/deactivate" method="post" class="d-inline"
+                              onsubmit="return confirm('비활성화 하시겠습니까?');">
+                            <button class="erp-btn" style="color:#dc2626;border-color:#fca5a5;">비활성화</button>
+                        </form>
+                        {{/enabled}}
+                        {{^enabled}}
+                        <form action="/admin/users/{{id}}/activate" method="post" class="d-inline">
+                            <button class="erp-btn" style="color:#16a34a;border-color:#86efac;">활성화</button>
+                        </form>
+                        {{/enabled}}
+                    </div>
+                </td>
+            </tr>
+            {{/users}}
+        </tbody>
+    </table>
+    {{>admin/pagination}}
+</div>
+
+{{>admin-footer}}

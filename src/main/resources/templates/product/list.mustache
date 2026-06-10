@@ -1,0 +1,108 @@
+{{>header}}
+
+<main class="container py-5">
+    <!-- Hero Banner -->
+    <div class="hero-banner p-4 p-md-5 mb-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="display-6 fw-bold section-title mb-2">{{pageTitle}}</h1>
+                <p class="text-muted mb-4">원하는 상품을 검색하거나 카테고리를 선택하세요</p>
+                <form action="/products/search" method="get" class="d-flex gap-2" style="max-width:480px;">
+                    <input class="form-control form-control-lg rounded-3 input-sky"
+                           type="search" name="keyword" value="{{keyword}}"
+                           placeholder="상품명으로 검색...">
+                    <button class="btn btn-sky btn-lg px-4" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+                <div style="font-size:5rem;opacity:.15;color:var(--sky-500);">
+                    <i class="bi bi-bag-heart-fill"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="d-flex gap-2 mb-4 flex-wrap align-items-center">
+        <span class="text-muted small me-1">카테고리:</span>
+        <a href="/products" class="cat-badge cat-badge-lg text-decoration-none">전체</a>
+        <a href="/product/category/TV" class="cat-badge cat-badge-lg text-decoration-none">📺 TV</a>
+        <a href="/product/category/COMPUTER" class="cat-badge cat-badge-lg text-decoration-none">💻 컴퓨터</a>
+        <a href="/product/category/PHONE" class="cat-badge cat-badge-lg text-decoration-none">📱 휴대폰</a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {{#products}}
+        <div class="col">
+            <a href="/products/{{id}}" class="text-decoration-none">
+                <div class="shop-card h-100">
+                    <div class="product-img-wrap">
+                        {{#hasImage}}
+                        <img src="{{imageUrl}}" alt="{{name}}">
+                        {{/hasImage}}
+                        {{^hasImage}}
+                        <i class="bi bi-box-seam product-img-placeholder"></i>
+                        {{/hasImage}}
+                    </div>
+                    <div class="p-3">
+                        <span class="cat-badge mb-2">{{category}}</span>
+                        <h6 class="fw-bold mb-1 mt-2" style="color:var(--text-dark);">{{name}}</h6>
+                        <p class="text-muted small mb-3" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                            {{description}}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag fs-5">₩{{price}}</span>
+                            <span class="btn-sky btn btn-sm px-3">보기</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{/products}}
+        {{^products}}
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-box-seam" style="font-size:4rem;color:var(--sky-200);"></i>
+            <p class="text-muted mt-3">등록된 상품이 없습니다.</p>
+        </div>
+        {{/products}}
+    </div>
+
+    <!-- Pagination -->
+    {{#pageInfo}}
+    <nav class="mt-5 d-flex justify-content-center align-items-center gap-3">
+        <ul class="pagination mb-0">
+            {{#hasPrevious}}
+            <li class="page-item">
+                <a class="page-link" href="{{#keyword}}?keyword={{keyword}}&{{/keyword}}{{^keyword}}?{{/keyword}}page={{previousPage}}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            {{/hasPrevious}}
+            {{#pageNumbers}}
+            <li class="page-item {{#active}}active{{/active}}">
+                <a class="page-link" href="{{#keyword}}?keyword={{keyword}}&{{/keyword}}{{^keyword}}?{{/keyword}}page={{number}}">{{display}}</a>
+            </li>
+            {{/pageNumbers}}
+            {{#hasNext}}
+            <li class="page-item">
+                <a class="page-link" href="{{#keyword}}?keyword={{keyword}}&{{/keyword}}{{^keyword}}?{{/keyword}}page={{nextPage}}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {{/hasNext}}
+        </ul>
+        <small class="text-muted">총 {{totalElements}}개</small>
+    </nav>
+    {{/pageInfo}}
+
+    <div class="mt-4 text-end">
+        <a href="/product/new" class="btn btn-sky-outline px-4">
+            <i class="bi bi-plus-lg me-1"></i>상품 등록
+        </a>
+    </div>
+</main>
+
+{{>footer}}
