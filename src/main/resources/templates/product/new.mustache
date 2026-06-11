@@ -2,14 +2,14 @@
 <main class="container py-5" style="max-width:640px;">
     <div class="card rounded-4 border-0 shadow-sm">
         <div class="card-body p-5">
-            <h2 class="fw-bold mb-4 section-title"><i class="bi bi-plus-circle me-2"></i>상품 등록</h2>
+            <h2 class="fw-bold mb-4 section-title"><i class="bi bi-bag-plus-fill me-2"></i>상품 등록</h2>
             <form action="/product/create" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label fw-semibold">상품명</label>
                     <input type="text" class="form-control search-input" name="name" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">가격 (원)</label>
+                    <label class="form-label fw-semibold">가격(원)</label>
                     <input type="number" class="form-control search-input" name="price" min="0" required>
                 </div>
                 <div class="mb-3">
@@ -26,17 +26,16 @@
                     <textarea class="form-control search-input" name="description" rows="3"></textarea>
                 </div>
 
-                <!-- 이미지 업로드 -->
                 <div class="mb-4">
                     <label class="form-label fw-semibold">
                         상품 이미지
                         <small class="text-muted fw-normal ms-1">첫 번째 이미지가 대표 이미지로 설정됩니다</small>
                     </label>
-                    <div class="upload-area rounded-3 border-2 border-dashed p-4 text-center"
-                         style="border: 2px dashed #bae6fd; cursor:pointer; background:#f8faff;"
+                    <div class="upload-area rounded-3 p-4 text-center"
+                         style="border: 2px dashed #c5cf91; cursor:pointer; background:#fbfcf3;"
                          onclick="document.getElementById('imageInput').click()">
-                        <i class="bi bi-cloud-arrow-up" style="font-size:2rem; color:#0ea5e9;"></i>
-                        <p class="mb-0 mt-2 text-muted small">클릭하여 이미지 선택 또는 드래그 앤 드롭</p>
+                        <i class="bi bi-images" style="font-size:2rem; color:#667134;"></i>
+                        <p class="mb-0 mt-2 text-muted small">클릭해서 이미지를 선택하거나 드래그해 주세요</p>
                         <p class="text-muted" style="font-size:0.75rem;">JPG, PNG, WebP, GIF · 최대 10MB · 여러 장 가능</p>
                     </div>
                     <input type="file" id="imageInput" name="images" multiple
@@ -50,8 +49,8 @@
                 {{/imageError}}
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-check-lg me-1"></i>등록하기
+                    <button type="submit" class="btn px-4" style="background:#667134;color:#fff;border-color:#667134;">
+                        <i class="bi bi-bag-check-fill me-1"></i>등록하기
                     </button>
                     <a href="/products" class="btn btn-outline-secondary px-4">취소</a>
                 </div>
@@ -71,8 +70,8 @@ function previewImages(input) {
             wrapper.className = 'position-relative';
             wrapper.innerHTML = `
                 <img src="${e.target.result}" class="rounded-2 object-fit-cover"
-                     style="width:80px;height:80px;border:2px solid ${i===0?'#0ea5e9':'#e2e8f0'};">
-                ${i===0 ? '<span class="position-absolute top-0 start-0 badge bg-primary" style="font-size:0.6rem;">대표</span>' : ''}
+                     style="width:80px;height:80px;border:2px solid ${i===0?'#667134':'#dfe3c8'};">
+                ${i===0 ? '<span class="position-absolute top-0 start-0 badge" style="font-size:0.6rem;background:#667134;">대표</span>' : ''}
             `;
             preview.appendChild(wrapper);
         };

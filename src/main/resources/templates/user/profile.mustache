@@ -1,16 +1,16 @@
 {{>header}}
 <main class="container py-5" style="max-width:700px;">
-    <h2 class="section-title mb-4"><i class="bi bi-person-circle me-2"></i>내 정보</h2>
+    <h2 class="section-title mb-4"><i class="bi bi-person-badge-fill me-2"></i>내 정보</h2>
 
     <div class="card rounded-4 border-0 shadow-sm mb-4">
         <div class="card-body p-4">
             <div class="d-flex align-items-center mb-4">
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
-                     style="width:56px;height:56px;background:#e0f2fe;">
-                    <i class="bi bi-person-fill" style="font-size:1.8rem;color:#0369a1;"></i>
+                     style="width:56px;height:56px;background:#e9ecd5;">
+                    <i class="bi bi-person-hearts" style="font-size:1.8rem;color:#667134;"></i>
                 </div>
                 <div>
-                    <div class="fw-bold fs-5" style="color:#0369a1;">{{currentUser.email}}</div>
+                    <div class="fw-bold fs-5" style="color:#59642f;">{{currentUser.email}}</div>
                     <small class="text-muted">가입일: {{currentUser.createdAtFormatted}}</small>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <th class="text-muted">계정 상태</th>
-                    <td><span class="badge bg-success">활성</span></td>
+                    <td><span class="badge" style="background:#667134;">활성</span></td>
                 </tr>
                 <tr>
                     <th class="text-muted">가입일</th>
@@ -31,10 +31,9 @@
         </div>
     </div>
 
-    <!-- 최근 로그인 기록 -->
     <div class="card rounded-4 border-0 shadow-sm mb-4">
         <div class="card-body p-4">
-            <h5 class="mb-3"><i class="bi bi-clock-history me-2 text-primary"></i>최근 로그인 기록</h5>
+            <h5 class="mb-3"><i class="bi bi-clock-history me-2" style="color:#667134;"></i>최근 로그인 기록</h5>
             <table class="table table-sm table-hover mb-0">
                 <thead class="table-light">
                     <tr>

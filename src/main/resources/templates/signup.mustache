@@ -3,69 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>회원가입 · ShopMall</title>
+    <title>회원가입 · Online shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        :root { --sky-500:#0ea5e9; --sky-600:#0284c7; --sky-700:#0369a1; --sky-900:#0c4a6e; }
+        :root {
+            --olive-50:#f7f8ef;
+            --olive-100:#ecefdc;
+            --olive-300:#c5cf91;
+            --olive-500:#7f8f3a;
+            --olive-600:#66742f;
+            --olive-700:#4f5a25;
+            --olive-900:#283014;
+            --cream:#fbf8ef;
+            --ink:#26301f;
+            --muted:#76806a;
+        }
+        * { box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #38bdf8 0%, var(--sky-600) 50%, var(--sky-900) 100%);
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 24px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 80% 18%, rgba(236,239,220,.5), transparent 30%),
+                linear-gradient(135deg, #8e9c4a 0%, var(--olive-700) 52%, var(--olive-900) 100%);
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         .signup-card {
-            background: rgba(255,255,255,.97); border-radius: 24px;
-            box-shadow: 0 32px 80px rgba(12,74,110,.35);
-            width: 100%; max-width: 420px; padding: 48px 40px;
+            width: 100%;
+            max-width: 420px;
+            padding: 44px 38px;
+            border: 1px solid rgba(255,255,255,.66);
+            border-radius: 8px;
+            background: rgba(251,248,239,.97);
+            box-shadow: 0 28px 70px rgba(25,32,14,.32);
         }
-        .form-control { border-radius: 12px; border: 1.5px solid #e2e8f0; padding: .75rem 1rem; }
-        .form-control:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(14,165,233,.15); }
+        .brand-mark {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 8px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--olive-700), var(--olive-500));
+            box-shadow: 0 10px 24px rgba(79,90,37,.28);
+        }
+        .brand-name {
+            color: var(--olive-900);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        .brand-copy { color: var(--muted); font-size: .9rem; }
+        .form-label { color: #68725a; }
+        .form-control {
+            border-radius: 8px;
+            border: 1.5px solid #dfe4c8;
+            padding: .78rem 1rem;
+            background: #fffdf7;
+        }
+        .form-control:focus {
+            border-color: var(--olive-500);
+            box-shadow: 0 0 0 3px rgba(127,143,58,.16);
+        }
         .btn-signup {
-            background: linear-gradient(135deg, var(--sky-500) 0%, #38bdf8 100%);
-            border: none; border-radius: 12px; color: #fff; font-weight: 700;
-            padding: .8rem; font-size: 1rem; transition: all .2s;
+            padding: .82rem;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--olive-700), var(--olive-500));
+            transition: transform .2s, box-shadow .2s;
         }
-        .btn-signup:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,165,233,.4); color: #fff; }
-        .pw-hint { font-size: .75rem; color: #94a3b8; margin-top: 4px; }
-        .divider { display: flex; align-items: center; gap: 12px; color: #94a3b8; font-size: .85rem; }
-        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(102,116,47,.34);
+            color: #fff;
+        }
+        .pw-hint { font-size: .75rem; color: #879077; margin-top: 6px; }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #8b947f;
+            font-size: .85rem;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #dfe4c8;
+        }
+        .link-olive { color: var(--olive-600); }
+        .link-olive:hover { color: var(--olive-700); }
     </style>
 </head>
 <body>
 <div class="signup-card">
     <div class="text-center mb-4">
-        <div class="mb-3" style="width:56px;height:56px;background:linear-gradient(135deg,var(--sky-500),#38bdf8);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto;">
-            <i class="bi bi-person-plus text-white fs-4"></i>
+        <div class="brand-mark">
+            <i class="bi bi-person-hearts fs-3"></i>
         </div>
-        <h2 class="fw-bold mb-1" style="color:var(--sky-900);">회원가입</h2>
-        <p class="text-muted small">ShopMall의 새로운 멤버가 되어보세요</p>
+        <div class="brand-name">Online shop</div>
+        <p class="brand-copy mb-0">새 계정으로 쇼핑 경험을 시작하세요</p>
     </div>
 
     {{#signupError}}
-    <div class="alert border-0 rounded-3 py-2 mb-3" style="background:#fef2f2;color:#dc2626;font-size:.85rem;">
-        <i class="bi bi-exclamation-circle me-1"></i>{{signupError}}
+    <div class="alert border-0 rounded-3 py-2 mb-3" style="background:#fef2f2;color:#b91c1c;font-size:.85rem;">
+        <i class="bi bi-x-circle me-1"></i>{{signupError}}
     </div>
     {{/signupError}}
 
     <form action="/user" method="POST">
         {{#_csrf}}<input type="hidden" name="{{parameterName}}" value="{{token}}"/>{{/_csrf}}
         <div class="mb-3">
-            <label class="form-label fw-semibold small text-muted">이메일</label>
+            <label class="form-label fw-semibold small">이메일</label>
             <input type="email" class="form-control" name="email" placeholder="email@example.com" required autofocus>
         </div>
         <div class="mb-4">
-            <label class="form-label fw-semibold small text-muted">비밀번호</label>
+            <label class="form-label fw-semibold small">비밀번호</label>
             <input type="password" class="form-control" name="password" placeholder="8자 이상 입력해주세요" required>
-            <p class="pw-hint"><i class="bi bi-shield-check me-1"></i>비밀번호는 8자 이상이어야 합니다</p>
+            <p class="pw-hint"><i class="bi bi-lock-fill me-1"></i>비밀번호는 8자 이상이어야 합니다</p>
         </div>
         <button type="submit" class="btn btn-signup w-100">
-            <i class="bi bi-person-check me-2"></i>가입하기
+            <i class="bi bi-bag-check-fill me-2"></i>가입하기
         </button>
     </form>
 
     <div class="divider my-4">또는</div>
     <div class="text-center">
-        <span class="text-muted small">이미 계정이 있으신가요?</span>
-        <a href="/login" class="fw-semibold text-decoration-none ms-2" style="color:var(--sky-600);">로그인</a>
+        <span class="text-muted small">이미 계정이 있나요?</span>
+        <a href="/login" class="fw-semibold text-decoration-none ms-2 link-olive">로그인</a>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

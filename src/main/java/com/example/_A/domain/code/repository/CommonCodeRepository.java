@@ -8,6 +8,8 @@ import java.util.List;
 public interface CommonCodeRepository extends JpaRepository<CommonCode, Long> {
     List<CommonCode> findByCodeGroupAndActiveOrderBySortOrder(String codeGroup, boolean active);
 
+    boolean existsByCodeGroupAndCodeKey(String codeGroup, String codeKey);
+
     default List<CommonCode> findActiveByGroup(String codeGroup) {
         return findByCodeGroupAndActiveOrderBySortOrder(codeGroup, true);
     }

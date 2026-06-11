@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <title>ShopMall ERP</title>
+    <title>Online shop ERP</title>
     <style>
         :root {
-            --erp-bg: #0f172a;
-            --erp-sidebar: #1e293b;
-            --erp-hover: #334155;
-            --erp-active: #0ea5e9;
-            --erp-text: #94a3b8;
-            --erp-text-bright: #e2e8f0;
-            --erp-border: #334155;
+            --erp-bg: #293018;
+            --erp-sidebar: #394221;
+            --erp-hover: #4a552b;
+            --erp-active: #c5cf91;
+            --erp-text: #d5d9bd;
+            --erp-text-bright: #fffdf1;
+            --erp-border: #566032;
+            --erp-surface: #f5f6ee;
+            --erp-line: #dfe3c8;
         }
         * { box-sizing: border-box; }
-        body { margin: 0; background: #f1f5f9; font-size: 0.9rem; }
+        body { margin: 0; background: var(--erp-surface); font-size: 0.9rem; color: #30351e; }
 
-        /* Top bar */
         .erp-topbar {
             height: 56px;
             background: var(--erp-bg);
@@ -31,12 +32,11 @@
             top: 0; left: 0; right: 0;
             z-index: 1000;
         }
-        .erp-brand { color: #fff; font-weight: 700; font-size: 1rem; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .erp-brand { color: #fffdf1; font-weight: 700; font-size: 1rem; text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .erp-brand i { color: var(--erp-active); font-size: 1.2rem; }
         .erp-topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
         .erp-user { color: var(--erp-text); font-size: 0.82rem; }
 
-        /* Sidebar */
         .erp-sidebar {
             width: 220px;
             background: var(--erp-sidebar);
@@ -46,7 +46,7 @@
             padding: 16px 0;
             border-right: 1px solid var(--erp-border);
         }
-        .erp-sidebar-section { padding: 8px 16px 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #475569; }
+        .erp-sidebar-section { padding: 8px 16px 4px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #aeb88a; }
         .erp-nav-link {
             display: flex; align-items: center; gap: 10px;
             padding: 10px 20px;
@@ -56,75 +56,72 @@
             transition: all 0.15s;
         }
         .erp-nav-link:hover { background: var(--erp-hover); color: var(--erp-text-bright); }
-        .erp-nav-link.active { background: rgba(14,165,233,0.15); color: var(--erp-active); border-left: 3px solid var(--erp-active); }
+        .erp-nav-link.active { background: rgba(197,207,145,0.16); color: #fffdf1; border-left: 3px solid var(--erp-active); }
         .erp-nav-link i { font-size: 1rem; width: 18px; text-align: center; }
 
-        /* Content */
         .erp-content {
             margin-left: 220px;
             margin-top: 56px;
             padding: 28px;
             min-height: calc(100vh - 56px);
         }
-        .erp-page-title { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        .erp-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
-        .erp-card .card-header { background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 14px 20px; font-weight: 600; color: #374151; font-size: 0.88rem; }
+        .erp-page-title { font-size: 1.25rem; font-weight: 700; color: #30351e; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .erp-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(54,61,32,0.08); border: 1px solid var(--erp-line); }
+        .erp-card .card-header { background: #fbfbf5; border-bottom: 1px solid var(--erp-line); padding: 14px 20px; font-weight: 600; color: #3f4626; font-size: 0.88rem; }
         .erp-table { width: 100%; border-collapse: collapse; }
-        .erp-table th { background: #f8fafc; padding: 10px 14px; text-align: left; font-size: 0.78rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; }
-        .erp-table td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; font-size: 0.87rem; color: #374151; vertical-align: middle; }
-        .erp-table tr:hover td { background: #f8fafc; }
+        .erp-table th { background: #fbfbf5; padding: 10px 14px; text-align: left; font-size: 0.78rem; font-weight: 600; color: #6b7250; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--erp-line); }
+        .erp-table td { padding: 11px 14px; border-bottom: 1px solid #eff1e3; font-size: 0.87rem; color: #3f4626; vertical-align: middle; }
+        .erp-table tr:hover td { background: #fbfbf5; }
         .erp-table tr:last-child td { border-bottom: none; }
         .erp-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; }
-        .badge-admin { background: #fef3c7; color: #b45309; }
-        .badge-user { background: #e0f2fe; color: #0369a1; }
-        .badge-active { background: #dcfce7; color: #166534; }
-        .badge-inactive { background: #fee2e2; color: #991b1b; }
-        .erp-btn { padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; border: 1px solid; cursor: pointer; transition: all 0.15s; }
-        .erp-pagination { display: flex; align-items: center; gap: 4px; padding: 16px 20px; border-top: 1px solid #e2e8f0; }
-        .erp-page-btn { padding: 5px 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff; color: #374151; font-size: 0.8rem; cursor: pointer; text-decoration: none; }
-        .erp-page-btn:hover { background: #f1f5f9; }
-        .erp-page-btn.active { background: #0ea5e9; color: #fff; border-color: #0ea5e9; }
-        .erp-total { margin-left: auto; color: #6b7280; font-size: 0.8rem; }
+        .badge-admin { background: #f5ead2; color: #8a5a16; }
+        .badge-user { background: #e9ecd5; color: #59642f; }
+        .badge-active { background: #dce8cd; color: #315f2e; }
+        .badge-inactive { background: #f4ded7; color: #8f332f; }
+        .erp-btn { padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; border: 1px solid; cursor: pointer; transition: all 0.15s; background: #fff; }
+        .erp-btn:hover { background: #f4f6e8; }
+        .erp-pagination { display: flex; align-items: center; gap: 4px; padding: 16px 20px; border-top: 1px solid var(--erp-line); }
+        .erp-page-btn { padding: 5px 10px; border: 1px solid var(--erp-line); border-radius: 6px; background: #fff; color: #3f4626; font-size: 0.8rem; cursor: pointer; text-decoration: none; }
+        .erp-page-btn:hover { background: #f4f6e8; }
+        .erp-page-btn.active { background: #667134; color: #fff; border-color: #667134; }
+        .erp-total { margin-left: auto; color: #747b5b; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<!-- Top bar -->
 <div class="erp-topbar">
     <a href="/admin" class="erp-brand">
-        <i class="bi bi-grid-3x3-gap-fill"></i>
-        ShopMall ERP
+        <i class="bi bi-kanban-fill"></i>
+        Online shop ERP
     </a>
     <div class="erp-topbar-right">
-        <span class="erp-user"><i class="bi bi-person-circle me-1"></i>{{currentUser.email}}</span>
-        <a href="/products" class="btn btn-outline-secondary btn-sm" style="font-size:0.78rem;">
-            <i class="bi bi-shop me-1"></i>쇼핑몰
+        <span class="erp-user"><i class="bi bi-person-badge-fill me-1"></i>{{currentUser.email}}</span>
+        <a href="/products" class="btn btn-outline-light btn-sm" style="font-size:0.78rem;">
+            <i class="bi bi-basket2-fill me-1"></i>쇼핑몰
         </a>
-        <a href="/logout" class="btn btn-outline-danger btn-sm" style="font-size:0.78rem;">
-            <i class="bi bi-box-arrow-right me-1"></i>로그아웃
+        <a href="/logout" class="btn btn-outline-warning btn-sm" style="font-size:0.78rem;">
+            <i class="bi bi-door-closed-fill me-1"></i>로그아웃
         </a>
     </div>
 </div>
 
-<!-- Sidebar -->
 <nav class="erp-sidebar">
     <div class="erp-sidebar-section">관리 메뉴</div>
     <a href="/admin/users" class="erp-nav-link" id="nav-users">
-        <i class="bi bi-people-fill"></i> 유저 관리
+        <i class="bi bi-person-lines-fill"></i> 유저 관리
     </a>
     <a href="/admin/products" class="erp-nav-link" id="nav-products">
-        <i class="bi bi-box-seam-fill"></i> 상품 관리
+        <i class="bi bi-bag-heart-fill"></i> 상품 관리
     </a>
     <a href="/admin/articles" class="erp-nav-link" id="nav-articles">
-        <i class="bi bi-file-text-fill"></i> 게시글 관리
+        <i class="bi bi-journal-text"></i> 게시글 관리
     </a>
     <a href="/admin/comments" class="erp-nav-link" id="nav-comments">
-        <i class="bi bi-chat-left-text-fill"></i> 댓글 관리
+        <i class="bi bi-chat-dots-fill"></i> 댓글 관리
     </a>
 </nav>
 
 <script>
-// Active nav highlight based on URL
 const path = window.location.pathname;
 ['users','products','articles','comments'].forEach(p => {
     if (path.includes('/admin/' + p)) {
@@ -133,7 +130,6 @@ const path = window.location.pathname;
 });
 </script>
 
-<!-- Flash message -->
 {{#msg}}
 <div style="margin-left:220px;margin-top:56px;padding:0 28px;">
     <div class="alert alert-success alert-dismissible mt-3 py-2">
@@ -143,5 +139,4 @@ const path = window.location.pathname;
 </div>
 {{/msg}}
 
-<!-- Main content area -->
 <div class="erp-content">

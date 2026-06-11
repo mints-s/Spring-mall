@@ -1,9 +1,8 @@
 {{>admin-header}}
 
-<div class="erp-page-title"><i class="bi bi-pencil-fill" style="color:#0ea5e9;"></i> 상품 수정</div>
+<div class="erp-page-title"><i class="bi bi-pencil-square" style="color:#667134;"></i> 상품 수정</div>
 
 <div class="d-flex gap-4 align-items-start flex-wrap">
-    <!-- 상품 정보 수정 폼 -->
     <div class="erp-card" style="flex:1;min-width:360px;">
         <div class="card-header">기본 정보</div>
         <div class="p-4">
@@ -13,7 +12,7 @@
                     <input type="text" class="form-control" name="name" value="{{product.name}}" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold" style="font-size:0.85rem;">가격 (원)</label>
+                    <label class="form-label fw-semibold" style="font-size:0.85rem;">가격(원)</label>
                     <input type="number" class="form-control" name="price" value="{{product.price}}" min="0" required>
                 </div>
                 <div class="mb-3">
@@ -29,7 +28,6 @@
                     <textarea class="form-control" name="description" rows="3">{{product.description}}</textarea>
                 </div>
 
-                <!-- 이미지 추가 업로드 -->
                 <div class="mb-3">
                     <label class="form-label fw-semibold" style="font-size:0.85rem;">이미지 추가</label>
                     <input type="file" class="form-control" name="images" multiple
@@ -38,23 +36,24 @@
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary btn-sm px-4">저장</button>
+                    <button type="submit" class="btn btn-sm px-4" style="background:#667134;color:#fff;border-color:#667134;">
+                        <i class="bi bi-check2-circle me-1"></i>저장
+                    </button>
                     <a href="/admin/products" class="btn btn-outline-secondary btn-sm px-4">취소</a>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- 등록된 이미지 관리 -->
     <div class="erp-card" style="flex:1;min-width:340px;">
         <div class="card-header d-flex justify-content-between align-items-center">
             <span>등록 이미지</span>
-            <span class="text-muted" style="font-size:0.78rem;">대표 이미지: 파란 테두리</span>
+            <span class="text-muted" style="font-size:0.78rem;">대표 이미지는 올리브 테두리로 표시됩니다</span>
         </div>
         <div class="p-4">
             {{#images}}
             <div class="d-flex align-items-center gap-3 mb-3 p-2 rounded-2"
-                 style="border:1px solid {{#representative}}#0ea5e9{{/representative}}{{^representative}}#e2e8f0{{/representative}};">
+                 style="border:1px solid {{#representative}}#667134{{/representative}}{{^representative}}#dfe3c8{{/representative}};">
                 <img src="{{imageUrl}}" alt="{{originalFileName}}"
                      class="rounded-2 object-fit-cover flex-shrink-0"
                      style="width:64px;height:64px;object-fit:cover;">
@@ -70,7 +69,7 @@
                 <div class="d-flex flex-column gap-1 flex-shrink-0">
                     {{^representative}}
                     <form action="/admin/products/{{productId}}/images/{{id}}/representative" method="post">
-                        <button class="erp-btn w-100" style="color:#0369a1;border-color:#7dd3fc;font-size:0.72rem;">
+                        <button class="erp-btn w-100" style="color:#59642f;border-color:#c5cf91;font-size:0.72rem;">
                             대표 지정
                         </button>
                     </form>
@@ -79,8 +78,8 @@
                     <span class="erp-badge badge-user" style="font-size:0.72rem;">대표</span>
                     {{/representative}}
                     <form action="/admin/products/{{productId}}/images/{{id}}/delete" method="post"
-                          onsubmit="return confirm('이미지를 삭제하시겠습니까?');">
-                        <button class="erp-btn w-100" style="color:#dc2626;border-color:#fca5a5;font-size:0.72rem;">
+                          onsubmit="return confirm('이 이미지를 삭제하시겠습니까?');">
+                        <button class="erp-btn w-100" style="color:#a23b34;border-color:#e3a59d;font-size:0.72rem;">
                             삭제
                         </button>
                     </form>
@@ -89,7 +88,7 @@
             {{/images}}
             {{^images}}
             <div class="text-center py-4 text-muted">
-                <i class="bi bi-image" style="font-size:2rem;color:#bae6fd;"></i>
+                <i class="bi bi-image" style="font-size:2rem;color:#c5cf91;"></i>
                 <p class="mt-2 small">등록된 이미지가 없습니다.</p>
             </div>
             {{/images}}

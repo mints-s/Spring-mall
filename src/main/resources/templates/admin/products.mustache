@@ -1,14 +1,14 @@
 {{>admin-header}}
 
-<div class="erp-page-title"><i class="bi bi-box-seam-fill" style="color:#0ea5e9;"></i> 상품 관리</div>
+<div class="erp-page-title"><i class="bi bi-bag-heart-fill" style="color:#667134;"></i> 상품 관리</div>
 
 <div class="erp-card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <span>상품 목록</span>
         <div class="d-flex gap-2 align-items-center">
             <span class="text-muted" style="font-size:0.8rem;">총 {{pageInfo.totalElements}}개</span>
-            <a href="/product/new" class="erp-btn" style="color:#0369a1;border-color:#7dd3fc;text-decoration:none;">
-                <i class="bi bi-plus me-1"></i>상품 등록
+            <a href="/product/new" class="erp-btn" style="color:#59642f;border-color:#c5cf91;text-decoration:none;">
+                <i class="bi bi-bag-plus-fill me-1"></i>상품 등록
             </a>
         </div>
     </div>
@@ -35,13 +35,13 @@
                 <td class="text-muted">{{createdAtFormatted}}</td>
                 <td>
                     <div class="d-flex gap-1">
-                        <a href="/admin/products/{{id}}/edit" class="erp-btn" style="color:#0369a1;border-color:#7dd3fc;text-decoration:none;">
-                            <i class="bi bi-pencil"></i> 수정
+                        <a href="/admin/products/{{id}}/edit" class="erp-btn" style="color:#59642f;border-color:#c5cf91;text-decoration:none;">
+                            <i class="bi bi-pencil-square"></i> 수정
                         </a>
                         <form action="/admin/products/{{id}}/delete" method="post" class="d-inline"
-                              onsubmit="return confirm('삭제 하시겠습니까?');">
-                            <button class="erp-btn" style="color:#dc2626;border-color:#fca5a5;">
-                                <i class="bi bi-trash"></i> 삭제
+                              onsubmit="return confirm('이 상품을 삭제하시겠습니까?');">
+                            <button class="erp-btn" style="color:#a23b34;border-color:#e3a59d;">
+                                <i class="bi bi-trash3"></i> 삭제
                             </button>
                         </form>
                     </div>

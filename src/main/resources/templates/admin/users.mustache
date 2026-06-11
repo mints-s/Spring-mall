@@ -1,6 +1,6 @@
 {{>admin-header}}
 
-<div class="erp-page-title"><i class="bi bi-people-fill" style="color:#0ea5e9;"></i> 유저 관리</div>
+<div class="erp-page-title"><i class="bi bi-person-lines-fill" style="color:#667134;"></i> 유저 관리</div>
 
 <div class="erp-card">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -22,9 +22,9 @@
             {{#users}}
             <tr>
                 <td class="text-muted">{{id}}</td>
-                <td><i class="bi bi-person-circle text-primary me-1"></i>{{email}}</td>
+                <td><i class="bi bi-person-badge-fill me-1" style="color:#667134;"></i>{{email}}</td>
                 <td>
-                    {{#admin}}<span class="erp-badge badge-admin"><i class="bi bi-shield-fill me-1"></i>ADMIN</span>{{/admin}}
+                    {{#admin}}<span class="erp-badge badge-admin"><i class="bi bi-shield-lock-fill me-1"></i>ADMIN</span>{{/admin}}
                     {{^admin}}<span class="erp-badge badge-user">USER</span>{{/admin}}
                 </td>
                 <td>
@@ -37,24 +37,24 @@
                         {{#admin}}
                         <form action="/admin/users/{{id}}/role" method="post" class="d-inline">
                             <input type="hidden" name="role" value="USER">
-                            <button class="erp-btn" style="color:#6b7280;border-color:#d1d5db;">USER 강등</button>
+                            <button class="erp-btn" style="color:#6b7250;border-color:#cdd3aa;">USER로 변경</button>
                         </form>
                         {{/admin}}
                         {{^admin}}
                         <form action="/admin/users/{{id}}/role" method="post" class="d-inline">
                             <input type="hidden" name="role" value="ADMIN">
-                            <button class="erp-btn" style="color:#b45309;border-color:#fcd34d;">ADMIN 승격</button>
+                            <button class="erp-btn" style="color:#8a5a16;border-color:#d8c086;">ADMIN으로 변경</button>
                         </form>
                         {{/admin}}
                         {{#enabled}}
                         <form action="/admin/users/{{id}}/deactivate" method="post" class="d-inline"
-                              onsubmit="return confirm('비활성화 하시겠습니까?');">
-                            <button class="erp-btn" style="color:#dc2626;border-color:#fca5a5;">비활성화</button>
+                              onsubmit="return confirm('이 계정을 비활성화하시겠습니까?');">
+                            <button class="erp-btn" style="color:#a23b34;border-color:#e3a59d;">비활성화</button>
                         </form>
                         {{/enabled}}
                         {{^enabled}}
                         <form action="/admin/users/{{id}}/activate" method="post" class="d-inline">
-                            <button class="erp-btn" style="color:#16a34a;border-color:#86efac;">활성화</button>
+                            <button class="erp-btn" style="color:#315f2e;border-color:#9fbd8d;">활성화</button>
                         </form>
                         {{/enabled}}
                     </div>
